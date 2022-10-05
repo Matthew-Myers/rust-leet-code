@@ -6,37 +6,34 @@ impl Solution {
         let mut idx1 = 0;
         let mut idx2 = 0;
         let len = nums1.len() + nums2.len();
-        let even: usize = if let 0=len%2 {
-            0
-        } else {
-            1
-        };
+        let even: usize = len%2;
         
         let mut i = 0;
-        let mut previousItem: f64 = 0.0;
-        let mut secondPreviousItem: f64 = 0.0;
+        let mut prev_item: f64 = 0.0;
+        let mut second_prev_item: f64 = 0.0;
         while i <= len/2 + even {
-            secondPreviousItem = previousItem;
+            println!("i: {}, idx1: {}, idx2: {}", i, idx1, idx2);
+            second_prev_item = prev_item;
             if idx1 == nums1.len() {
-                previousItem = nums2[idx2] as f64;
+                prev_item = nums2[idx2] as f64;
                 idx2 = idx2 + 1;
             } else if idx2 == nums2.len() {
-                previousItem = nums1[idx1] as f64;
+                prev_item = nums1[idx1] as f64;
                 idx1 = idx1 + 1;
             }
             else if nums1[idx1] <= nums2[idx2] {
-                previousItem = nums1[idx1] as f64;
+                prev_item = nums1[idx1] as f64;
                 idx1 = idx1 + 1;
             } else {
-                previousItem = nums2[idx2] as f64;
+                prev_item = nums2[idx2] as f64;
                 idx2 = idx2 + 1;
             }
             i = i+1;
         }
         if  even == 0 {
-            return ((previousItem + secondPreviousItem) / 2 as f64)
+            return (prev_item + second_prev_item) / 2 as f64
         } else {
-            return secondPreviousItem as f64
+            return second_prev_item as f64
         }
 
     }   
